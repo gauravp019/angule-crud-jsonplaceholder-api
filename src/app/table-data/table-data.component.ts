@@ -9,26 +9,26 @@ import { ApiDataService } from '../api-data.service'
 export class TableDataComponent implements OnInit {
   sMet: any;
   deletedData: any;
-  displayedColumns = ['id', 'name', 'email', 'actions'];
+  datasource: any = [];
+  displayedColumns = ['id', 'name', 'email', 'companyname', 'city', 'actions'];
 
   constructor(private apidata: ApiDataService) {
-    this.sMet = () => this.apidata.userdata;
   }
 
   ngOnInit() {
     console.log(this.apidata.userdata)
     if (this.apidata.userdata) {
-      this.apidata.userdata
+      this.datasource = this.apidata.userdata
     } else {
       this.getData()
     }
-    // this.deletepost(this.sMet.data)
   };
 
   getData() {
     this.apidata.getJson().subscribe(result => {
       // this.jsonData = result;
       this.apidata.userdata = result;
+      this.datasource = result;
 
     }
     );
@@ -39,8 +39,8 @@ export class TableDataComponent implements OnInit {
 
     this.apidata.userdata.forEach((value, index) => {
       if (value == data) this.apidata.userdata.splice(index, 1);
-      // this.jsonData = this.apidata.userdata;
-      this.deletedData = this.apidata.userdata;
+      this.datasource = [...this.apidata.userdata];
+
     });
     console.log(this.apidata.userdata)
   };

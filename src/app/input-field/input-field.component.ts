@@ -10,10 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router'
   styleUrls: ['./input-field.component.css']
 })
 export class InputFieldComponent implements OnInit {
-  id: string
-  // jsonData: any;
+  citys: any;
+  id: string;
+  iMet: any;
   public myForm = new FormGroup({});
-  constructor(private router: Router, private apidata: ApiDataService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private apidata: ApiDataService, private route: ActivatedRoute) {
+    this.iMet = () => this.apidata.userdata;
+  }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -21,6 +24,7 @@ export class InputFieldComponent implements OnInit {
       username: new FormControl(''),
       name: new FormControl(''),
       email: new FormControl(''),
+      companyname: new FormControl(''),
       phone: new FormControl(''),
       city: new FormControl('')
     });
@@ -35,21 +39,36 @@ export class InputFieldComponent implements OnInit {
         if (obj.id = this.id) {
           this.myForm.patchValue({
             id: obj.id,
-            username: obj["username"],
+            username: obj.username,
             name: obj.name,
             email: obj.email,
+            companyname: obj.company.name,
             phone: obj.phone,
             city: obj.address.city
-          })
+          });
+          this.citys = obj.address.city;
         }
       }
     });
+
+
   }
 
   updatePost() {
+    // console.log(this.myForm.value.id)
+    var random = {
+      id: this.myForm.value.id,
+      name: this.myForm.value.name,
+      email: this.myForm.value.email,
+      username: this.myForm.value.username,
+      phone: this.myForm.value.phone,
+      company: { name: this.myForm.value.companyname },
+      address: { city: this.citys }
+    }
+
     if (this.id == this.myForm.value.id) {
       let index: any = this.apidata.userdata.findIndex(x => x.id === this.id);
-      this.apidata.userdata[index] = this.myForm.value;
+      this.apidata.userdata[index] = random;
       this.router.navigate(['/home']);
     }
     console.log(this.myForm.value)

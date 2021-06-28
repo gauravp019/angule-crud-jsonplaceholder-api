@@ -18,15 +18,19 @@
         <mat-label>phone</mat-label>
         <input matInput placeholder="phone" formControlName="phone">
     </mat-form-field>
+    <mat-form-field>
+        <mat-label>Company name</mat-label>
+        <input matInput placeholder="Company Name" formControlName="companyname">
+    </mat-form-field>
 
-    <!-- <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill">
         <mat-label>City</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let citys of jsonData" [value]="citys.value">
-                {{citys.address.city}}
+        <mat-select [(value)]="citys">
+            <mat-option *ngFor="let state of iMet()" [value]="state.address.city">
+                {{state.address.city}}
             </mat-option>
         </mat-select>
-    </mat-form-field> -->
+    </mat-form-field>
     <p>
         <button mat-raised-button color="primary" type="submit">Submit</button>
     </p>

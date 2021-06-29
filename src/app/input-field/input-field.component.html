@@ -1,7 +1,6 @@
 <p>input-field works!</p>
-<form [formGroup]="myForm" (ngSubmit)='updatePost()'>
+<form [formGroup]="myForm" (ngSubmit)='updatePost(myForm.value)'>
     <p>Account ID: {{ id }}</p>
-
     <mat-form-field>
         <mat-label>username</mat-label>
         <input matInput placeholder="username" formControlName="username">

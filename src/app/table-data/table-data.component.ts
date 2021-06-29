@@ -19,6 +19,7 @@ export class TableDataComponent implements OnInit {
     console.log(this.apidata.userdata)
     if (this.apidata.userdata) {
       this.datasource = this.apidata.userdata
+      this.apidata.alldata = this.datasource;
     } else {
       this.getData()
     }
@@ -44,5 +45,8 @@ export class TableDataComponent implements OnInit {
     });
     console.log(this.apidata.userdata)
   };
+  addpost(user) {
 
+
+  }
 }

@@ -23,7 +23,6 @@ export class InputFieldComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.apidata.alldata)
     this.myForm = new FormGroup({
       id: new FormControl(''),
       username: new FormControl(''),
@@ -36,9 +35,11 @@ export class InputFieldComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.apidata.userdata)
+
     if (this.id == this.apidata.userdata[0].id) {
       console.log(this.apidata.userdata)
       var obj = this.apidata.userdata.find((o: any) => o.id === Number(this.id));
+      console.log(obj)
       this.myForm.patchValue({
         id: obj.id,
         username: obj.username,
@@ -52,10 +53,10 @@ export class InputFieldComponent implements OnInit {
 
     } else {
       this.apidata.getJson().subscribe(result => {
-        // console.log(this.random)
+        console.log(this.random)
         this.apidata.userdata = result;
         var obj = this.apidata.userdata.find((o: any) => o.id === Number(this.id));
-        // console.log(obj)
+        console.log(obj)
         if (obj) {
           if (obj.id = this.id) {
             this.myForm.patchValue({
@@ -96,19 +97,22 @@ export class InputFieldComponent implements OnInit {
       company: { name: this.myForm.value.companyname },
       address: { city: this.citys }
     }
+    // console.log(this.myForm.value.id)
 
     if (this.id == this.myForm.value.id) {
       let index: any = this.apidata.userdata.findIndex(x => x.id === this.id);
       this.apidata.userdata[index] = this.random;
+      console.log('update')
       this.router.navigate(['/home']);
     }
     else {
       this.random = newuser
       this.apidata.userdata.unshift(this.random)
+      console.log('add')
       this.router.navigate(['/home']);
 
     }
-    console.log(this.myForm.value)
+    // console.log(this.myForm.value)
     console.log(this.apidata.userdata)
   }
 }

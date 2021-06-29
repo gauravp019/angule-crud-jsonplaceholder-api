@@ -16,10 +16,9 @@ export class TableDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.apidata.userdata)
+    // console.log(this.apidata.userdata)
     if (this.apidata.userdata) {
       this.datasource = this.apidata.userdata
-      this.apidata.alldata = this.datasource;
     } else {
       this.getData()
     }
@@ -27,7 +26,6 @@ export class TableDataComponent implements OnInit {
 
   getData() {
     this.apidata.getJson().subscribe(result => {
-      // this.jsonData = result;
       this.apidata.userdata = result;
       this.datasource = result;
 

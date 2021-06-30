@@ -16,7 +16,6 @@ export class TableDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.apidata.userdata)
     if (this.apidata.userdata) {
       this.datasource = this.apidata.userdata
     } else {
